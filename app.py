@@ -22,7 +22,7 @@ async def main():
                 hash_file = hashlib.md5(url.encode())
                 file = hash_file.hexdigest()
                 link = url.replace("\n", "")
-                if(os.path.exists(file)):
+                if os.path.exists(file):
                     rmtree(file)
                 else:
                     os.mkdir(file)
@@ -31,25 +31,11 @@ async def main():
                         with open("{0}/{1}".format(file, f"{file}.txt"), "wb") as f:
                             f.write(resp.encode())
                 print(
-                    f"{index} ---  {file[::-6]} --- {(time.time() - start_time_loop)} seconds ---")
-            except:
+                    f"{index} ---  {file[::-6]} --- {(time.time() - start_time_loop)} seconds ---"
+                )
+            except Exception:
                 pass
+
 
 asyncio.run(main())
 print("--- %s seconds ---" % (time.time() - start_time))
-
-# Enter which files you want to download
-# with open("urls.txt", "r") as f:
-#     urls = f.readlines()
-
-# for e in urls:
-#     hash_file = hashlib.md5(e.encode())
-#     file = hash_file.hexdigest()
-#     url = e.replace("\n", "")
-#     if(os.path.exists(file)):
-#         rmtree(file)
-#     else:
-#         os.mkdir(file)
-#         rq = requests.get(url)
-#         with open("{0}/{1}".format(file, f"{file}.txt"), "wb") as f:
-#             f.write(rq.content)
